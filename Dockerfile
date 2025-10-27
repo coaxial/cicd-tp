@@ -1,7 +1,7 @@
 FROM node:22-alpine
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir /__w/cicd-tp/cicd-tp
+WORKDIR /__w/cicd-tp/cicd-tp
 
 COPY package.json . package-lock.json ./
 RUN npm ci
