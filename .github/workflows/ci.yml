@@ -19,7 +19,7 @@ jobs:
           UUID=$(uuidgen)
           echo "IMAGE_NAME=${UUID}" >> $GITHUB_OUTPUT
       - name: Build docker image
-        run: docker build -t ttl.sh/${UUID} .
+        run: docker build -t ttl.sh/${UUID}:2h .
       - name: Push docker image
         run: docker push ttl.sh/${UUID}:2h
 
