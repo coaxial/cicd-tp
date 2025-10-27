@@ -9,44 +9,37 @@ on:
 jobs:
   install:
     runs-on: ubuntu-latest
+    outputs:
+      IMAGE_NAME: ${{ steps.generate-uuid.outputs.uuid }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
-      - run: npm ci
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Generate UUID
+        id: generate-uuid
+        run: |
+          UUID=$(uuidgen)
+          echo "IMAGE_NAME=${UUID}" >> $GITHUB_OUTPUT
+          echo "::set-output IMAGE_NAME=uuid::${UUID}"
+      - name: Build docker image
+        run: docker build -t ttl.sh/${UUID}
+      - name: Push docker image
+        run: docker push ttl.sh/${UUID}:2h
 
   lint:
     runs-on: ubuntu-latest
     needs: install
+    env:
+      IMAGE_NAME: ${{ needs.install.outputs.IMAGE_NAME }}
+    container:
+      image: ttl.sh/${IMAGE_NAME}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
       - run: npm run lint
 
   test:
     runs-on: ubuntu-latest
     needs: install
+    env:
+      IMAGE_NAME: ${{ needs.install.outputs.IMAGE_NAME }}
+    container:
+      image: ttl.sh/${IMAGE_NAME}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
       - run: npm test
