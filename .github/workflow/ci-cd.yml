@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: "master"
+    branches: "anais-hamon"
 
 jobs:
   build_and_test:
