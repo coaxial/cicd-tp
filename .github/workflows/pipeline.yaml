@@ -24,6 +24,6 @@ jobs:
         run: npm test
 
       - name: lint code
-        run: rpm run lint 
+        run: npm run lint 
 
   
