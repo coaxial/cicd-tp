@@ -3,9 +3,9 @@ name: CI/CD Pipeline
 # Déclenche le workflow sur les Pull Requests et les push sur master
 on:
   pull_request:
-    branches: "alice-champigny"
+    branches: "master"
   push:
-    branches: "alice-champigny"
+    branches: "master"
 
 jobs:
   lint:
