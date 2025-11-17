@@ -2,9 +2,9 @@ name: CI/CD pipeline juliette
 
 on:
   push:
-    branches: [ juliette-deploy ]
+    branches: [ master ]
   pull_request:
-    branches: [ juliette-deploy ]
+    branches: [ master ]
 
 jobs:
   build:
