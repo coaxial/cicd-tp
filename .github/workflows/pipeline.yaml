@@ -3,13 +3,12 @@ name: CI
 on:
   push:
   pull_request:
+  
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-
-jobs:
   steps:
     - name: checkout
       uses: actions/checkout@v5
@@ -17,7 +16,7 @@ jobs:
     - name: installer node.js
        uses: actions/setup-node@v4
        with:
-       node-version: ${{ fromFile('.nvmrc') }}
+        node-version: ${{ fromFile('.nvmrc') }}
 
     - name: installer les dépendances
       run: npm ci
