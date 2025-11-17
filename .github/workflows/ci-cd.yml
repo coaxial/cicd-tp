@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+
+# Déclenche le workflow sur les Pull Requests et les push sur master
+on:
+  pull_request:
+    branches: "alice-champigny"
+  push:
+    branches: "alice-champigny"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # Installation de Node.js depuis .nvmrc
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      
+      # Installation des dépendances avec npm ci
+      - name: Install dependencies
+        run: npm ci
+      
+      # Linting du code
+      - name: Lint code
+        run: npm run lint
