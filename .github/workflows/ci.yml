@@ -1,0 +1,23 @@
+# .github/workflows/ci.yml
+name: CI # Nom du workflow
+
+on:
+  push: # Déclenchement à chaque push/merge
+    branches:
+      - master # sur la branche `master' uniquement
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: master
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+      - name: Installe les dépendances
+        run: npm ci
+      - name : Exécute les tests
+        run: npm test
+      - name: Lint le code
+        run: npm run lint
