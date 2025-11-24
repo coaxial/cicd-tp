@@ -1,11 +1,11 @@
-# .github/workflows/ci.yml
+
 name: CI # Nom du workflow
 on:
-  push: # Déclenchement à chaque push/merge
+  push:
     branches:
-      - master # sur la branche 'master' uniquement
+      - master
 jobs:
-  deploy:  # Nom du 1er job
+  deploy:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v5
