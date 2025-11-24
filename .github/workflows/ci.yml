@@ -1,9 +1,7 @@
 
 name: CI # Nom du workflow
 on:
-  push:
-    branches:
-      - master
+  pull_request:
 jobs:
   deploy:
     runs-on: windows-latest
