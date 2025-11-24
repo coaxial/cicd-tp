@@ -1,0 +1,22 @@
+name: CI
+on:
+  pull:
+    branches:
+      - master
+  merge:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+      - name: Install deps
+        run: npm ci
+      - name: Run unit tests
+        run: npm test
+      - name: Linter
+        run: npm run lint
