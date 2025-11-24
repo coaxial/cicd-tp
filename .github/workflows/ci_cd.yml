@@ -1,0 +1,34 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout de repos git
+    - name: Checkout repos
+      uses: actions/checkout@v6
+
+    # Installation de Node.js avece la version v22.19.0
+    - name: Installation Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: 'v22.19.0'
+    
+    # Installation de la dépendance ci
+    - name: Installation des dépendances
+      run: npm ci
+    
+    # Exécution des tests
+    - name: Exécution des tests
+      run: npm test
+    
+    # Reformatter le code 
+    - name: Lint le code 
+      run: npm run lint
