@@ -16,7 +16,8 @@ jobs:
       - name: setup nodejs
         uses: actions/setup-node@v6
         with:
-          node-version: '.nvmrc'
+          node-version-file: '.nvmrc'
+          cache: 'npm'
       - name: install dependencies
         run: npm ci
       - name: run tests
