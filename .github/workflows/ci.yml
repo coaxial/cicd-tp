@@ -1,10 +1,8 @@
 # .github/workflows/ci.yml
-name: CI # Nom du workflow
+name: CI_First
 
 on:
-  push: # Déclenchement à chaque push/merge
-    branches:
-      - master # sur la branche `master' uniquement
+  pull_request:
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,10 +12,10 @@ jobs:
           ref: master
       - uses: actions/setup-node@v6
         with:
-          node-version-file: .nvmrc
+          node-version-file: ".nvmrc"
       - name: Installe les dépendances
         run: npm ci
-      - name : Exécute les tests
+      - name: Exécute les tests
         run: npm test
       - name: Lint le code
         run: npm run lint
