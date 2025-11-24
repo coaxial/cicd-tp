@@ -5,8 +5,8 @@ on:
     branches:
       - master # sur la branche 'master' uniquement
 jobs:
-  deploy: windows-latest # Nom du 1er job
-    runs-on: 
+  deploy:  # Nom du 1er job
+    runs-on: windows-latest
     step:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v6
