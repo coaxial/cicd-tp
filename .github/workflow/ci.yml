@@ -1,13 +1,13 @@
 name: CI
 on:
-  pull:
+  pull_request:
     branches:
       - master
-  merge:
+  push:
     branches:
       - master
 jobs:
-  deploy:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
