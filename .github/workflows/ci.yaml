@@ -3,7 +3,7 @@ on:
   pull_request:
 jobs:
   deploy:
-    Run-on: ubuntu-latest # télécharge depuis github
+    Runs-on: ubuntu-latest # télécharge depuis github
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
