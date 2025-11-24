@@ -1,0 +1,25 @@
+name: CI Pipleline
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+my_job:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout feature/charuel
+        uses: actions/checkout@v6
+      - name: setup nodejs
+        uses: actions/setup-node@v6
+        with:
+          node-version: '.nvmrc'
+      - name: install dependencies
+        run: npm ci
+      - name: run tests
+        run: npm test
+      - name: lint code
+        run: npm run lint
