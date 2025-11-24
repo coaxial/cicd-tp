@@ -7,7 +7,7 @@ on:
 jobs:
   deploy:  # Nom du 1er job
     runs-on: windows-latest
-    step:
+    steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v6
         with : 
@@ -19,10 +19,6 @@ jobs:
       - name: Deploy project
         run: npm run deploy
       - name: Test
-        npm test
+        run: npm test
       - name: Lint
         run: npm run lint
-    jobs:
-      test:
-        needs: build
-
