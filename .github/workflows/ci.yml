@@ -1,23 +1,18 @@
 name: CI
 on:
   pull_request:
-    branches:
-      - master
-  push:
-    branches:
-      - master
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # télécharge depuis github
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
-      - name: Execute tests
-        run: npm test 
-      - name: Run Eslint
-        run: npx eslint
+      - name: Execution des tests Unitaires
+        run: npm test
+      - name: Lint du code
+        run: npm run lint
 
