@@ -1,7 +1,7 @@
-const { getGreeting } = require('../../src/greeting');
+const { getGreeting } = require("../../src/greeting");
 
-describe('getGreeting', () => {
-  it('returns the hello world message', () => {
-    expect(getGreeting()).toBe('Hello world');
+describe("getGreeting", () => {
+  it("returns the hello world message", () => {
+    expect(getGreeting()).toBe("Hello world!");
   });
 });
