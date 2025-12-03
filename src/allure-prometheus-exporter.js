@@ -33,6 +33,7 @@ function updateMetrics() {
   const files = fs
     .readdirSync(ALLURE_RESULTS_DIR)
     .filter((f) => f.endsWith(".json"));
+  console.debug({ files });
   let total = 0,
     passed = 0,
     failed = 0,
@@ -45,9 +46,14 @@ function updateMetrics() {
     );
     if (data.status) {
       total++;
-      if (data.status === "passed") passed++;
-      else if (data.status === "failed") failed++;
-      else if (data.status === "skipped") skipped++;
+      if (data.status === "passed") {
+        passed++;
+      } else if (data.status === "failed") {
+        failed++;
+      } else if (data.status === "skipped") {
+        skipped++;
+        return;
+      }
       if (data.time && data.time.duration) {
         durations.push(data.time.duration);
       } else {
