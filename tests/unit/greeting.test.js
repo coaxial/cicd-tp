@@ -5,7 +5,7 @@ describe("getGreeting", () => {
     expect(getGreeting()).toBe("Hello world!");
   });
 
-  it("fails on purpose to test CI", () => {
-    expect(1 + 1).toBe(3);
-  });
+  // it("fails on purpose to test CI", () => {
+  //   expect(1 + 1).toBe(3);
+  // });
 });
