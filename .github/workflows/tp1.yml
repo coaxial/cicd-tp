@@ -1,0 +1,21 @@
+name: Pierrick
+on:
+  pull_request :
+    branches:
+      - 'master'
+  merge:
+    branches:
+      - 'master'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      # with:
+      #   refs: master
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+      - uses: npm ci
+      - uses: npm test
+      - uses: npm run lint
