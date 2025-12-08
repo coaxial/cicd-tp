@@ -1,8 +1,13 @@
 name: CI/CD Pipeline
 
+on:
+  push:
+    branches:
+      - master
+  
 jobs:
   lint:
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
