@@ -1,0 +1,53 @@
+
+# Nom du workflow (ce qui apparaîtra dans l'onglet "Actions")
+name: CI
+
+# Déclencheurs : quand exécuter ce workflow ?
+on:
+  push:                 # Quand il y a un push…
+    branches: [master]  # …sur la branche master
+  pull_request:         # Quand il y a une Pull Request…
+    branches: [master]  # …vers la branche master
+
+# ---- JOB 1 : LINT ----------------------------------------------------------
+jobs:
+  lint:                 # Nom du job : "lint"
+    runs-on: ubuntu-latest  # Machine virtuelle fournie par GitHub
+
+    steps:              # Liste des étapes du job
+      - uses: actions/checkout@v4
+        # Étape 1 : récupérer le code du repo dans la machine virtuelle
+
+      - uses: actions/setup-node@v4
+        # Étape 2 : installer Node.js
+        with:
+          node-version-file: ".nvmrc"
+          # → GitHub lit ta version Node dans le fichier .nvmrc
+
+      - run: npm ci
+        # Étape 3 : installer les dépendances proprement
+        # "npm ci" = installation rapide, propre et déterministe
+
+      - run: npm run lint
+        # Étape 4 : exécuter le linting du code
+        # (détecter les erreurs de style/syntaxe via eslint)
+
+
+# ---- JOB 2 : TEST ----------------------------------------------------------
+  test:                 # Nom du second job : "test"
+    runs-on: ubuntu-latest  # Il tourne sur une autre machine virtuelle
+
+    steps:
+      - uses: actions/checkout@v4
+        # Étape 1 : récupère à nouveau le code (chaque job est indépendant)
+
+      - uses: actions/setup-node@v4
+        # Étape 2 : installe Node.js
+        with:
+          node-version-file: ".nvmrc"
+
+      - run: npm ci
+        # Étape 3 : installe les dépendances
+
+      - run: npm test
+        # Étape 4 : exécute les tests unitaires contenus dans /tests/unit
