@@ -16,6 +16,6 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
-      - uses: npm ci
-      - uses: npm test
-      - uses: npm run lint
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
