@@ -1,2 +1,3 @@
 allure-results/
 nodes_modules
+.aider*
