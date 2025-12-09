@@ -24,5 +24,19 @@ describe("getGreeting", () => {
   it("converts non-string names to string", () => {
     expect(getGreeting(42)).toBe("Hello world! From 42");
     expect(getGreeting({})).toBe("Hello world! From [object Object]");
+    expect(getGreeting([])).toBe("Hello world! From ");
+    expect(getGreeting(["Alice","Bob"])).toBe("Hello world! From Alice,Bob");
+    expect(getGreeting(NaN)).toBe("Hello world!");
+  });
+
+  it("handles whitespace-only names", () => {
+    expect(getGreeting("   ")).toBe("Hello world!");
+    expect(getGreeting("\t")).toBe("Hello world!");
+    expect(getGreeting("\n")).toBe("Hello world!");
+  });
+
+  it("handles extremely long names", () => {
+    const longName = "A".repeat(1000);
+    expect(getGreeting(longName)).toBe(`Hello world! From ${longName}`);
   });
 });
