@@ -25,7 +25,7 @@ describe("getGreeting", () => {
   it("converts non-string names to string", () => {
     expect(getGreeting(42)).toBe("Hello world! From 42");
     expect(getGreeting({})).toBe("Hello world! From [object Object]");
-    expect(getGreeting([])).toBe("Hello world! From ");
+    expect(getGreeting([])).toBe("Hello world!");
     expect(getGreeting(["Alice","Bob"])).toBe("Hello world! From Alice,Bob");
     expect(getGreeting(NaN)).toBe("Hello world! From NaN");
     expect(getGreeting()).toBe("Hello world!"); // pas de paramètre = undefined
