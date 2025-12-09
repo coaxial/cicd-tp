@@ -4,43 +4,15 @@ const { getGreeting } = require("./greeting");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware pour parser les corps JSON
-app.use(express.json());
-
-/**
- * @route GET /hello/:name?
- * @param {string} name - Nom à saluer (optionnel)
- * @returns {string} Message de salutation
- */
-app.get("/hello/:name?", (req, res) => {
-  const name = req.params.name || "stranger";
-  
-  if (/\d/.test(name)) {
-    return res.status(400).json({ 
-      error: "Name should not contain numbers" 
-    });
-  }
-
-  res.status(200).send(getGreeting(name));
+// Route simple pour GET /hello
+app.get("/hello", (req, res) => {
+  res.send(getGreeting());
 });
 
-/**
- * @route POST /hello
- * @headers x-name
- * @body {object} - Peut contenir un nom dans le corps JSON (optionnel)
- * @returns {string} Message de salutation
- */
+// Route POST /hello qui accepte un paramètre de nom
 app.post("/hello", (req, res) => {
-  // Priorité au corps de requête puis à l'en-tête
-  const name = req.body.name || req.headers["x-name"] || "stranger";
-
-  if (/\d/.test(name)) {
-    return res.status(400).json({ 
-      error: "Name should not contain numbers" 
-    });
-  }
-
-  res.status(200).send(getGreeting(name));
+  const name = req.body.name;
+  res.send(getGreeting(name));
 });
 
 if (require.main === module) {
