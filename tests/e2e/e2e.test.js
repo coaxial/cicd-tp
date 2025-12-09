@@ -16,9 +16,9 @@ afterAll((done) => {
 });
 
 describe("E2E GET /hello", () => {
-  it("responds with Hello world", async () => {
+  it("responds with Hello", async () => {
     const res = await axios.get(`${baseURL}/hello`);
     expect(res.status).toBe(200);
-    expect(res.data).toBe("Hello world!");
+    expect(res.data).toBe("Hello");
   });
 });

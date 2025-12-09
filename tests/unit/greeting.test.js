@@ -33,4 +33,12 @@ describe('getGreeting', () => {
   it('should return a greeting with a name with non-ASCII characters', () => {
     expect(getGreeting('Jöhn Döe')).toBe('Hello Jöhn Döe');
   });
+
+  it('should return a greeting with a name containing a tab character', () => {
+    expect(getGreeting('\t')).toBe('Hello \t');
+  });
+
+  it('should return a greeting with a name containing a newline character', () => {
+    expect(getGreeting('\n')).toBe('Hello \n');
+  });
 });
