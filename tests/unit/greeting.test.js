@@ -1,7 +1,11 @@
 const { getGreeting } = require("../../src/greeting");
 
 describe("getGreeting", () => {
-  it("returns the hello world message", () => {
-    expect(getGreeting()).toBe("Hello world!");
+  it("return 'Hello stranger!' when no name is provided", () => {
+    expect(getGreeting()).toBe("Hello stranger!");
+  });
+
+  it("return personalized greeting when name is provided", () => {
+    expect(getGreeting("John")).toBe("Hello John!");
   });
 });

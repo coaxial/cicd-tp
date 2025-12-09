@@ -4,15 +4,17 @@ const { getGreeting } = require("./greeting");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get("/hello/:name?", (req, res) => {
-  const name = req.params.name;
+// Middleware pour parser le corps des requêtes en JSON
+app.use(express.json());
 
-  res.send(getGreeting(name));
+// Route GET /hello
+app.get("/hello", (req, res) => {
+  res.send(getGreeting());
 });
 
+// Route POST /hello
 app.post("/hello", (req, res) => {
-  const name = req.headers["x-name"];
-
+  const name = req.body.name;
   res.send(getGreeting(name));
 });
 
