@@ -1,9 +1,10 @@
 function getGreeting(name) {
   const greeting = `Hello world!`;
-  const nameStr = String(name ?? '').trim();
-
-  if (nameStr) {
-    return `${greeting} From ${nameStr}`;
+  
+  if (typeof name === 'string' && name.trim() !== '') {
+    return `${greeting} From ${name.trim()}`;
+  } else if (name) {
+    return `${greeting} From ${String(name).trim()}`;
   }
 
   return greeting;

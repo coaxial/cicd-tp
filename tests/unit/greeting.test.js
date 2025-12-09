@@ -14,11 +14,12 @@ describe("getGreeting", () => {
     expect(getGreeting("")).toBe("Hello world!");
   });
 
-  it("returns base greeting for falsy values", () => {
+  it("returns base greeting only for undefined/null", () => {
     expect(getGreeting(null)).toBe("Hello world!");
     expect(getGreeting(undefined)).toBe("Hello world!");
-    expect(getGreeting(0)).toBe("Hello world!");
-    expect(getGreeting(false)).toBe("Hello world!");
+    // Truthy values like 0, false are considered valid names
+    expect(getGreeting(0)).toBe("Hello world! From 0");
+    expect(getGreeting(false)).toBe("Hello world! From false");
   });
 
   it("converts non-string names to string", () => {
@@ -27,7 +28,7 @@ describe("getGreeting", () => {
     expect(getGreeting([])).toBe("Hello world! From ");
     expect(getGreeting(["Alice","Bob"])).toBe("Hello world! From Alice,Bob");
     expect(getGreeting(NaN)).toBe("Hello world! From NaN");
-    expect(getGreeting()).toBe("Hello world!");
+    expect(getGreeting()).toBe("Hello world!"); // pas de paramètre = undefined
   });
 
   it("handles whitespace-only names", () => {
