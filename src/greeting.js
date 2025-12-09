@@ -1,13 +1,14 @@
 function getGreeting(name) {
-  const greeting = `Hello world!`;
+  const greeting = "Hello world!";
   
-  if (typeof name === 'string' && name.trim() !== '') {
-    return `${greeting} From ${name.trim()}`;
-  } else if (name) {
-    return `${greeting} From ${String(name).trim()}`;
+  if (name === undefined || name === null) {
+    return greeting;
   }
 
-  return greeting;
+  const stringName = String(name);
+  const trimmedName = stringName.trim();
+
+  return trimmedName ? `${greeting} From ${trimmedName}` : greeting;
 }
 
 module.exports = { getGreeting };
