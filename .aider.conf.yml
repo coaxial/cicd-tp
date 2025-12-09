@@ -1,0 +1,6 @@
+dark-mode: true
+
+model: openrouter/mistralai/mistral-7b-instruct:free
+
+api_keys:
+  openrouter: ${OPENROUTER_API_KEY}

@@ -1,1 +1,3 @@
 allure-results/
+.aider*
+.env
