@@ -74,8 +74,3 @@ describe("E2E tests for all routes", () => {
     });
   });
 });
-```
-
-Et mettons à jour le `package.json` pour ajouter la configuration Jest.
-
-package.json

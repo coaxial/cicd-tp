@@ -73,8 +73,3 @@ describe("Integration tests for server routes", () => {
     });
   });
 });
-```
-
-Maintenant, améliorons les tests unitaires pour la fonction `getGreeting` afin d'avoir une couverture plus complète.
-
-tests/unit/greeting.test.js
