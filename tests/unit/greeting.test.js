@@ -26,7 +26,8 @@ describe("getGreeting", () => {
     expect(getGreeting({})).toBe("Hello world! From [object Object]");
     expect(getGreeting([])).toBe("Hello world! From ");
     expect(getGreeting(["Alice","Bob"])).toBe("Hello world! From Alice,Bob");
-    expect(getGreeting(NaN)).toBe("Hello world!");
+    expect(getGreeting(NaN)).toBe("Hello world! From NaN");
+    expect(getGreeting()).toBe("Hello world!");
   });
 
   it("handles whitespace-only names", () => {

@@ -1,12 +1,9 @@
 function getGreeting(name) {
   const greeting = `Hello world!`;
+  const nameStr = String(name ?? '').trim();
 
-  // Trim whitespace first and handle empty strings
-  const trimmedName = name ? String(name).trim() : '';
-  if (trimmedName) {
-    const wisher = `From ${trimmedName}`;
-
-    return `${greeting} ${wisher}`;
+  if (nameStr) {
+    return `${greeting} From ${nameStr}`;
   }
 
   return greeting;
