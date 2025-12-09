@@ -33,6 +33,7 @@ describe("getGreeting", () => {
     expect(getGreeting("   ")).toBe("Hello world!");
     expect(getGreeting("\t")).toBe("Hello world!");
     expect(getGreeting("\n")).toBe("Hello world!");
+    expect(getGreeting("  \t\n  ")).toBe("Hello world!");
   });
 
   it("handles extremely long names", () => {
