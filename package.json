@@ -5,9 +5,9 @@
   "scripts": {
     "lint": "eslint .",
     "test": "jest",
-    "test:unit": "jest tests/unit --reporters=default --reporters=jest-junit",
-    "test:integration": "jest tests/integration --reporters=default --reporters=jest-junit",
-    "test:e2e": "jest tests/e2e --reporters=default --reporters=jest-junit",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "test:e2e": "jest tests/e2e",
     "start": "node src/server.js"
   },
   "dependencies": {
