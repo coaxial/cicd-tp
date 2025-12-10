@@ -41,6 +41,14 @@ jobs:
         if: always()
         run: |
           allure generate allure-results --clean -o allure-report || true
+          allure generate allure-results --clean -o allure-intermediate || true
+          echo "=== Allure Report Statistics ==="
+          echo "Total tests: $(jq '.statistic.total' allure-intermediate/widgets/summary.json)"
+          echo "Passed: $(jq '.statistic.passed' allure-intermediate/widgets/summary.json)"
+          echo "Failed: $(jq '.statistic.failed' allure-intermediate/widgets/summary.json)"
+          echo "Broken: $(jq '.statistic.broken' allure-intermediate/widgets/summary.json)"
+          echo "Skipped: $(jq '.statistic.skipped' allure-intermediate/widgets/summary.json)"
+          echo "Success rate: $(jq '.statistic.passedPercent' allure-intermediate/widgets/summary.json)%"
 
       - name: Upload Allure Report
         if: always()
