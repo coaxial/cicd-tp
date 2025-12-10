@@ -16,6 +16,7 @@
     "supertest": "^6.3.0"
   },
   "devDependencies": {
+    "allure-jest": "^3.4.3",
     "eslint": "^8.0.0",
     "jest": "^29.7.0",
     "jest-junit": "^16.0.0"
@@ -24,8 +25,8 @@
     "node": ">=22.19.0"
   },
   "jest-junit": {
-  "outputDirectory": "allure-results",
-  "outputName": "junit.xml"
+    "outputDirectory": "allure-results",
+    "outputName": "junit.xml"
   },
   "files": [
     ".gitignore",
