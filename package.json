@@ -5,9 +5,9 @@
   "scripts": {
     "lint": "eslint .",
     "test": "jest",
-    "test:unit": "jest tests/unit",
-    "test:integration": "jest tests/integration",
-    "test:e2e": "jest tests/e2e",
+    "test:unit": "jest tests/unit --reporters=default --reporters=jest-junit",
+    "test:integration": "jest tests/integration --reporters=default --reporters=jest-junit",
+    "test:e2e": "jest tests/e2e --reporters=default --reporters=jest-junit",
     "start": "node src/server.js"
   },
   "dependencies": {
@@ -22,6 +22,10 @@
   },
   "engines": {
     "node": ">=22.19.0"
+  },
+  "jest-junit": {
+  "outputDirectory": "allure-results",
+  "outputName": "junit.xml"
   },
   "files": [
     ".gitignore",
