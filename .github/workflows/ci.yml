@@ -34,28 +34,28 @@ jobs:
         run: npm run lint
 
       # 6. Charger l’historique des rapports depuis gh-pages
-      - name: Load test report history
+      - name: Checkout gh-pages (history)
         uses: actions/checkout@v5
         if: always()
         continue-on-error: true
         with:
           ref: gh-pages
-          path: allure-history
+          path: gh-pages-dir
 
       # 7. Générer le rapport Allure
-      - name: Build Allure report
-        uses: allure-framework/allure-report-action@v2
+      - name: Generate Allure report
+        uses: andgineer/allure-report@v3
         if: always()
         with:
-          allure_results: build/allure-results
-          allure_history: allure-history
-          keep_history: true
+          allure-results: build/allure-results
+          website: gh-pages-dir
+          reports-site-path: allure-report
 
       # 8. Publier sur GitHub Pages
-      - name: Publish Allure report to GitHub Pages
+      - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history
+          publish_dir: gh-pages-dir
