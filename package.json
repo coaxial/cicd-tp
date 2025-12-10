@@ -25,8 +25,8 @@
     "node": ">=22.19.0"
   },
   "jest-junit": {
-    "outputDirectory": "allure-results",
-    "outputName": "junit.xml"
+  "outputDirectory": "junit-results",
+  "outputName": "junit.xml"
   },
   "files": [
     ".gitignore",
