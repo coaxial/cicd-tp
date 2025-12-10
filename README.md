@@ -58,16 +58,6 @@ Check code quality:
 npm run lint
 ```
 
-## Prometheus Exporter
-
-To start it:
-
-```
-npm run exporter
-```
-
-It will run at `http://localhost:9091/metrics`
-
 ## Project Structure
 
 - `src/greeting.js`: Core greeting logic.
