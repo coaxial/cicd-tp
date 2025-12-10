@@ -1,3 +1,7 @@
-allure-results/
 nodes_modules
 .aider*
+allure-reports/
+allure-results/
+allure
+package-lock.json
+package-json
