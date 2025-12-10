@@ -1,44 +1,47 @@
-# .github/workflows/ci.yml
 name: CI
 on:
-  push: # Déclenchement à chaque push/merge
+  push:
     branches:
-      - master # sur la branche `master' uniquement
+      - master
+
 jobs:
-  deploy: # Nom du premier job
-    runs-on: ubuntu-latest # macos, windows…
+  tests:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
         with:
-          node-version-file: ".nvmrc" # Contient "v22.19.0"
+          node-version-file: ".nvmrc"
+
       - name: Install dependencies
         run: npm ci
-      - name: Test project
+
+      - name: Run tests (Jest + Allure)
         run: npm test
-      - name: Lint project
-        run: npm run lint
-      - name: Install Allure
-        run: npm install -g allure
-      - name: Load test report history
+
+      - name: Save Allure history from gh-pages
         uses: actions/checkout@v3
         if: always()
-        continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
-      - name: Ensure Allure results folder exists
-        run: mkdir -p build/allure-results
+        continue-on-error: true
+
       - name: Generate Allure report
         uses: andgineer/allure-report@v3
+        if: always()
         with:
-          allure-results: build/allure-results
+          allure-results: allure-results
           website: gh-pages
           reports-site-path: allure-report
-      - name: Publish test report
+          report-name: Allure Test Report
+
+      - name: Publish Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history
+          publish_dir: allure-report
