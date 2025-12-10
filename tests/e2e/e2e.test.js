@@ -21,4 +21,30 @@ describe("E2E GET /hello", () => {
     expect(res.status).toBe(200);
     expect(res.data).toBe("Hello world!");
   });
+
+  it("handles invalid query parameters gracefully", async () => {
+    const res1 = await axios.get(`${baseURL}/hello?invalidParam=test`);
+    expect(res1.status).toBe(200);
+    expect(res1.data).toBe("Hello world!");
+
+    const res2 = await axios.get(`${baseURL}/hello?name=`);
+    expect(res2.status).toBe(200);
+    expect(res2.data).toBe("Hello world!");
+  });
+
+  it("validates HTTP methods", async () => {
+    try {
+      await axios.post(`${baseURL}/hello`);
+    } catch (err) {
+      expect(err.response.status).toBe(405);
+    }
+  });
+
+  it("returns 404 for unknown routes", async () => {
+    try {
+      await axios.get(`${baseURL}/invalid-route`);
+    } catch (err) {
+      expect(err.response.status).toBe(404);
+    }
+  });
 });

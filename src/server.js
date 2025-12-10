@@ -4,16 +4,17 @@ const { getGreeting } = require("./greeting");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get("/hello/:name?", (req, res) => {
-  const name = req.params.name;
-
-  res.send(getGreeting(name));
+app.get("/hello", (req, res) => {
+  const name = req.query.name;
+  res.status(200).send(getGreeting(name));
 });
 
-app.post("/hello", (req, res) => {
-  const name = req.headers["x-name"];
+app.all("/hello", (req, res) => {
+  res.sendStatus(405);
+});
 
-  res.send(getGreeting(name));
+app.use((req, res) => {
+  res.sendStatus(404);
 });
 
 if (require.main === module) {
