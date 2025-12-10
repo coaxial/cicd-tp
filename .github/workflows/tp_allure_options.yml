@@ -27,11 +27,12 @@ jobs:
 
       - name: Run tests with Allure 3
         id: test-step
-        run: allure run -- npm test
-
-    outputs:
-      result: ${{ steps.test-step.outcome }}
-
+        run: |
+          allure run -- npm test
+          if [ $? -eq 0 ]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
 
       - name: Archive Allure report
         uses: actions/upload-artifact@v4
